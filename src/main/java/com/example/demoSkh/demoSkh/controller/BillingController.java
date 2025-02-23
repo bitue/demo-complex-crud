@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/billing")
 @AllArgsConstructor
 public class BillingController {
-
     private final BillingService billingService;
     private final AppointmentService appointmentService;
 
@@ -44,6 +43,5 @@ public class BillingController {
     public Flux<Billing> getBillByAppointmentId(@PathVariable Long appointmentId) {
         return billingService.findByAppointmentId(appointmentId);
     }
-
 
 }

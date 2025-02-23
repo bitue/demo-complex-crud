@@ -1,7 +1,6 @@
 package com.example.demoSkh.demoSkh.controller;
 import com.example.demoSkh.demoSkh.model.Doctor;
 import com.example.demoSkh.demoSkh.services.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -9,14 +8,11 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
-
-    @Autowired
-    private DoctorService doctorService;
+    private final DoctorService doctorService;
 
     DoctorController(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
-
 
     @PostMapping
     public Mono<Doctor> saveDoctor(@RequestBody Doctor doctor) {
@@ -43,10 +39,5 @@ public class DoctorController {
     public Mono<Void> deleteDoctor(@PathVariable long id) {
         return doctorService.deleteById(id);
     }
-
-
-
-
-
 
 }

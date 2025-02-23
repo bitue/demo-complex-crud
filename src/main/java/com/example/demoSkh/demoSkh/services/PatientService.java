@@ -5,7 +5,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface PatientService {
-
     public Mono<Patient> savePatient(Patient patient);
     public Mono<Patient> updatePatient(Patient patient, Long id);
     public Mono<Patient> getPatient(Long id);
