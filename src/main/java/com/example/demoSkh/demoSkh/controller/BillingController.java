@@ -1,4 +1,5 @@
 package com.example.demoSkh.demoSkh.controller;
+import com.example.demoSkh.demoSkh.dto.BillingDto;
 import com.example.demoSkh.demoSkh.model.Billing;
 import com.example.demoSkh.demoSkh.services.AppointmentService;
 import com.example.demoSkh.demoSkh.services.BillingService;
@@ -15,12 +16,12 @@ public class BillingController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/{id}")
-    public Mono<Billing> getBill(@PathVariable  Long id) {
+    public Mono<BillingDto> getBill(@PathVariable  Long id) {
         return billingService.findById(id);
     }
 
     @GetMapping
-    public Flux<Billing> getAllBills() {
+    public Flux<BillingDto> getAllBills() {
         return billingService.findAll();
     }
 
@@ -30,17 +31,17 @@ public class BillingController {
     }
 
     @PostMapping
-    public Mono<Billing> createBill(@RequestBody Billing billing) {
-        return billingService.save(billing);
+    public Mono<BillingDto> createBill(@RequestBody BillingDto billingDto) {
+        return billingService.save(billingDto);
     }
 
     @PutMapping("/{id}")
-    public Mono<Billing> updateBill(@PathVariable Long id, @RequestBody Billing billing) {
-        return billingService.update(id,billing);
+    public Mono<BillingDto> updateBill(@PathVariable Long id, @RequestBody BillingDto billingDto) {
+        return billingService.update(id,billingDto);
     }
 
     @GetMapping("/appointment/{appointmentId}")
-    public Flux<Billing> getBillByAppointmentId(@PathVariable Long appointmentId) {
+    public Flux<BillingDto> getBillByAppointmentId(@PathVariable Long appointmentId) {
         return billingService.findByAppointmentId(appointmentId);
     }
 

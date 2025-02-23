@@ -1,5 +1,5 @@
 package com.example.demoSkh.demoSkh.controller;
-import com.example.demoSkh.demoSkh.model.Appointment;
+import com.example.demoSkh.demoSkh.dto.AppointmentDto;
 import com.example.demoSkh.demoSkh.services.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,28 +13,28 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/doctor/{doctorId}")
-    public Flux<Appointment> findByDoctorId(@PathVariable Long doctorId) {
+    public Flux<AppointmentDto> findByDoctorId(@PathVariable Long doctorId) {
         return appointmentService.findByDoctorId(doctorId);
     }
 
     @GetMapping
-    public Flux<Appointment> findAll() {
+    public Flux<AppointmentDto> findAll() {
         return appointmentService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Mono<Appointment> findById(@PathVariable Long id) {
+    public Mono<AppointmentDto> findById(@PathVariable Long id) {
         return appointmentService.findById(id);
     }
 
     @PostMapping
-    public Mono<Appointment> save(@RequestBody Appointment appointment) {
-        return appointmentService.save(appointment);
+    public Mono<AppointmentDto> save(@RequestBody AppointmentDto appointmentDto) {
+        return appointmentService.save(appointmentDto);
     }
 
     @PutMapping("/{id}")
-    public Mono<Appointment> update(@RequestBody Appointment appointment, @PathVariable Long id) {
-        return appointmentService.update(appointment, id);
+    public Mono<AppointmentDto> update(@RequestBody AppointmentDto appointmentDto, @PathVariable Long id) {
+        return appointmentService.update(appointmentDto, id);
     }
 
     @DeleteMapping("/{id}")

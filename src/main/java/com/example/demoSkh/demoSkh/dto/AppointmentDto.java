@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentDto {
-
     private Long appointmentId;
     private Long patientId;
     private Long doctorId;

@@ -1,51 +1,47 @@
 package com.example.demoSkh.demoSkh.services.Impl;
+import com.example.demoSkh.demoSkh.dto.PatientDto;
 import com.example.demoSkh.demoSkh.model.Patient;
 import com.example.demoSkh.demoSkh.repository.PatientRepository;
 import com.example.demoSkh.demoSkh.services.PatientService;
-
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@AllArgsConstructor
 @Service
 public class PatientServiceImpl implements PatientService {
 
-
     private final PatientRepository patientRepository;
+    private final ModelMapper modelMapper;
 
 
-
-    PatientServiceImpl(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-
+    @Override
+    public Mono<PatientDto> savePatient(PatientDto patientDto) {
+        return patientRepository.save(modelMapper.map(patientDto, Patient.class)).map(patient->modelMapper.map(patient, PatientDto.class));
     }
 
     @Override
-    public Mono<Patient> savePatient(Patient patient) {
-
-        return patientRepository.save(patient);
-    }
-
-    @Override
-    public Mono<Patient> updatePatient(Patient patient, Long id) {
+    public Mono<PatientDto> updatePatient(PatientDto patientDto, Long id) {
        return patientRepository.findById(id)
-               .flatMap(ele -> {
-                     ele.setName(patient.getName());
-                     ele.setAddress(patient.getAddress());
-                     ele.setPhone(patient.getPhone());
-                     return patientRepository.save(ele);
+               .flatMap(patient -> {
+                   patient.setName(patientDto.getName());
+                   patient.setAddress(patientDto.getAddress());
+                   patient.setPhone(patientDto.getPhone());
+                   return patientRepository.save(modelMapper.map(patient, Patient.class)).map(updatedPatient->modelMapper.map(updatedPatient, PatientDto.class));
        });
 
     }
 
     @Override
-    public Mono<Patient> getPatient(Long id) {
-        return patientRepository.findById(id);
+    public Mono<PatientDto> getPatient(Long id) {
+        return patientRepository.findById(id).map(patient -> modelMapper.map(patient, PatientDto.class));
     }
 
     @Override
-    public Flux<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public Flux<PatientDto> getAllPatients() {
+        return patientRepository.findAll().map(person -> modelMapper.map(person, PatientDto.class));
     }
 
     @Override
