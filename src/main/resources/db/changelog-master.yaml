@@ -1,0 +1,123 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ashik
+      changes:
+        - createTable:
+            tableName: doctor
+            columns:
+              - column:
+                  name: doctor_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: designation
+                  type: varchar(255)
+              - column:
+                  name: specialization
+                  type: varchar(255)
+              - column:
+                  name: address
+                  type: varchar(255)
+
+
+  - changeSet:
+      id: 2
+      author: ashik
+      changes:
+        - createTable:
+            tableName: patient
+            columns:
+              - column:
+                  name: patient_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: address
+                  type: varchar(255)
+              - column:
+                  name: phone
+                  type: varchar(20)
+
+
+
+  - changeSet:
+      id: 3
+      author: ashik
+      changes:
+        - createTable:
+            tableName: appointment
+            columns:
+              - column:
+                  name: appointment_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: patient_id
+                  type: bigint
+              - column:
+                  name: doctor_id
+                  type: bigint
+              - column:
+                  name: details
+                  type: varchar(255)
+
+            foreignKeys:
+              - constraintName: fk_appointment_patient
+                columns:
+                  - patient_id
+                referencedTableName: patient
+                referencedColumnNames:
+                  - patient_id
+              - constraintName: fk_appointment_doctor
+                columns:
+                  - doctor_id
+                referencedTableName: doctor
+                referencedColumnNames:
+                  - doctor_id
+
+  - changeSet:
+      id: 4
+      author: ashik
+      changes:
+        - createTable:
+            tableName: billing
+            columns:
+              - column:
+                  name: billing_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: appointment_id
+                  type: bigint
+
+              - column:
+                  name: bill_amount
+                  type: decimal
+
+            foreignKeys:
+              - constraintName: fk_billing_appointment
+                columns:
+                  - appointment_id
+                referencedTableName: appointment
+                referencedColumnNames:
+                  - appointment_id
+
