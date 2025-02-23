@@ -1,7 +1,4 @@
 package com.example.demoSkh.demoSkh.controller;
-
-
-import com.example.demoSkh.demoSkh.model.Appointment;
 import com.example.demoSkh.demoSkh.model.Billing;
 import com.example.demoSkh.demoSkh.services.AppointmentService;
 import com.example.demoSkh.demoSkh.services.BillingService;
@@ -19,7 +16,7 @@ public class BillingController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/{id}")
-    public Mono<Billing> getBill(Long id) {
+    public Mono<Billing> getBill(@PathVariable  Long id) {
         return billingService.findById(id);
     }
 
@@ -44,7 +41,7 @@ public class BillingController {
     }
 
     @GetMapping("/appointment/{appointmentId}")
-    public Mono<Billing> getBillByAppointmentId(@PathVariable Long appointmentId) {
+    public Flux<Billing> getBillByAppointmentId(@PathVariable Long appointmentId) {
         return billingService.findByAppointmentId(appointmentId);
     }
 

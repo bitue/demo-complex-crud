@@ -10,5 +10,5 @@ public interface BillingService {
     public Mono<Void> deleteById(Long id);
     public Mono<Billing> update(Long id, Billing billing);
     // extra method
-    public Mono<Billing> findByAppointmentId(Long appointmentId);
+    public Flux<Billing> findByAppointmentId(Long appointmentId);
 }

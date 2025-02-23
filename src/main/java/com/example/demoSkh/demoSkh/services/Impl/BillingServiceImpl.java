@@ -1,5 +1,4 @@
 package com.example.demoSkh.demoSkh.services.Impl;
-
 import com.example.demoSkh.demoSkh.model.Billing;
 import com.example.demoSkh.demoSkh.repository.AppointmentRepository;
 import com.example.demoSkh.demoSkh.repository.BillingRepository;
@@ -50,7 +49,7 @@ public class BillingServiceImpl implements BillingService {
     }
 
     @Override
-    public Mono<Billing> findByAppointmentId(Long appointmentId) {
+    public Flux<Billing> findByAppointmentId(Long appointmentId) {
         return billingRepository.findByAppointmentId(appointmentId);
     }
 

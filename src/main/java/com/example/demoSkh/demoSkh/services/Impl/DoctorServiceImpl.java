@@ -52,6 +52,4 @@ public class DoctorServiceImpl implements DoctorService {
                 });
     }
 
-
-
 }
