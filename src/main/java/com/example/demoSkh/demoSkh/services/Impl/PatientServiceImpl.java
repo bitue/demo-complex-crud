@@ -29,6 +29,9 @@ public class PatientServiceImpl implements PatientService {
                    patient.setName(patientDto.getName());
                    patient.setAddress(patientDto.getAddress());
                    patient.setPhone(patientDto.getPhone());
+                   patient.setCity(patientDto.getCity());
+                   patient.setState(patientDto.getState());
+                   patient.setDateOfRegistration(patientDto.getDateOfRegistration());
                    return patientRepository.save(modelMapper.map(patient, Patient.class)).map(updatedPatient->modelMapper.map(updatedPatient, PatientDto.class));
        });
 
@@ -47,5 +50,15 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Mono<Void> deletePatient(Long id) {
         return patientRepository.deleteById(id);
+    }
+
+    @Override
+    public Flux<PatientDto> patientSearchByMultipleField(String startDate, String endDate, String city, String state) {
+        return patientRepository.patientSearchByMultipleField(startDate, endDate, city, state).map(data -> modelMapper.map(data, PatientDto.class));
+    }
+
+    @Override
+    public Flux<PatientDto> getPatientByStartDateAndEndDate(String startDate, String endDate) {
+        return patientRepository.getPatientByStartDateAndEndDate(startDate, endDate).map(data -> modelMapper.map(data, PatientDto.class));
     }
 }

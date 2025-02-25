@@ -1,7 +1,9 @@
 package com.example.demoSkh.demoSkh.controller;
 import com.example.demoSkh.demoSkh.dto.AppointmentDto;
+import com.example.demoSkh.demoSkh.dto.AppointmentResponseDto;
 import com.example.demoSkh.demoSkh.services.AppointmentService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,6 +13,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/appointment")
 public class AppointmentController {
     private final AppointmentService appointmentService;
+    private final ModelMapper modelMapper;
 
     @GetMapping("/doctor/{doctorId}")
     public Flux<AppointmentDto> findByDoctorId(@PathVariable Long doctorId) {
@@ -40,5 +43,10 @@ public class AppointmentController {
     @DeleteMapping("/{id}")
     public Mono<Void> delete(@PathVariable Long id) {
         return appointmentService.delete(id);
+    }
+
+    @GetMapping("/AppointmentInformation")
+    public Flux<AppointmentResponseDto> findAppointmentInformation() {
+        return appointmentService.AppointmentInformation().map(ele -> modelMapper.map(ele, AppointmentResponseDto.class));
     }
 }

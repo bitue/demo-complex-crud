@@ -1,6 +1,7 @@
 package com.example.demoSkh.demoSkh.services.Impl;
 
 import com.example.demoSkh.demoSkh.dto.AppointmentDto;
+import com.example.demoSkh.demoSkh.dto.AppointmentResponseDto;
 import com.example.demoSkh.demoSkh.model.Appointment;
 import com.example.demoSkh.demoSkh.repository.AppointmentRepository;
 import com.example.demoSkh.demoSkh.repository.DoctorRepository;
@@ -70,6 +71,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Flux<AppointmentDto> findByDoctorId(Long id) {
         return appointmentRepository.findByDoctorId(id).map(ele-> modelMapper.map(ele, AppointmentDto.class));
+    }
+
+    @Override
+    public Flux<AppointmentResponseDto> AppointmentInformation() {
+        return appointmentRepository.AppointmentInformation().map(ele-> modelMapper.map(ele, AppointmentResponseDto.class));
     }
 
     private Mono<Void> throwIfDoctorIdIsInvalid(Long id) {

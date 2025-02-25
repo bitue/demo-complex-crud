@@ -38,4 +38,22 @@ public class PatientController {
         return patientService.deletePatient(id) ;
     }
 
+    @GetMapping("/search")
+    public Flux<PatientDto> searchPatientByMultipleParam(
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) String city
+
+    ) {
+        return patientService.patientSearchByMultipleField(startDate, endDate, state, city) ;
+
+    }
+
+    @GetMapping("/search/dateInterval")
+    public Flux<PatientDto> searchPatientByDateInterval(@RequestParam String startDate , @RequestParam String endDate ) {
+        return patientService.getPatientByStartDateAndEndDate(startDate, endDate) ;
+
+    }
+
 }

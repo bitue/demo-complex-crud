@@ -49,7 +49,17 @@ databaseChangeLog:
                   type: varchar(255)
               - column:
                   name: phone
-                  type: varchar(20)
+                  type: varchar(50)
+              - column:
+                  name: date_of_registration
+                  type: varchar(255)
+
+              - column:
+                  name: city
+                  type: varchar(55)
+              - column:
+                  name: state
+                  type: varchar(55)
 
 
 

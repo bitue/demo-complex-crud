@@ -20,5 +20,9 @@ public class Patient {
     private String name;
     private String address;
     private String phone;
+    @Column("date_of_registration")
+    private String dateOfRegistration; // store as DATE type
+    private String city;
+    private String state;
 
 }

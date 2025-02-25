@@ -23,4 +23,5 @@ public class Appointment {
     @Column("doctor_id")
     private Long doctorId;
     private String details;
+
 }

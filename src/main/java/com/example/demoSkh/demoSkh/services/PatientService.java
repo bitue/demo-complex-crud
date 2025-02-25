@@ -11,4 +11,6 @@ public interface PatientService {
     public Mono<PatientDto> getPatient(Long id);
     public Flux<PatientDto> getAllPatients();
     public Mono<Void> deletePatient(Long id);
+    public Flux<PatientDto> patientSearchByMultipleField(String startDate, String endDate, String city , String state);
+    public Flux<PatientDto> getPatientByStartDateAndEndDate(String startDate, String endDate);
 }
