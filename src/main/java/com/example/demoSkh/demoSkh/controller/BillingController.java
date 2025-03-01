@@ -1,6 +1,5 @@
 package com.example.demoSkh.demoSkh.controller;
 import com.example.demoSkh.demoSkh.dto.BillingDto;
-import com.example.demoSkh.demoSkh.model.Billing;
 import com.example.demoSkh.demoSkh.services.AppointmentService;
 import com.example.demoSkh.demoSkh.services.BillingService;
 import lombok.AllArgsConstructor;
