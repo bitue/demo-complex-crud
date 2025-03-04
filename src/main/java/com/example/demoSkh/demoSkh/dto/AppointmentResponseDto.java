@@ -1,5 +1,4 @@
 package com.example.demoSkh.demoSkh.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
